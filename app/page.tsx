@@ -1,69 +1,131 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import React, { useEffect, useState, useRef } from "react";
+import { Slide1Cover, Slide2History, Slide3Congress } from "@/components/slides1";
+import { Slide4Pledge, Slide5Legacy, Slide6WRSupratman } from "@/components/slides2";
+import { Slide7Lyrics, Slide8Analysis, Slide9Relevance, Slide10Credits } from "@/components/slides3";
+import { cn } from "@/lib/utils";
+
+const slidesData = [
+  { Component: Slide1Cover, time: "~1 min", label: "Cover" },
+  { Component: Slide2History, time: "~2.5 min", label: "History" },
+  { Component: Slide3Congress, time: "~2.5 min", label: "Congress" },
+  { Component: Slide4Pledge, time: "~2 min", label: "Pledge" },
+  { Component: Slide5Legacy, time: "~1.5 min", label: "Legacy" },
+  { Component: Slide6WRSupratman, time: "~3 min", label: "W.R. Supratman" },
+  { Component: Slide7Lyrics, time: "~2 min", label: "Lyrics" },
+  { Component: Slide8Analysis, time: "~2.5 min", label: "Analysis" },
+  { Component: Slide9Relevance, time: "~2 min", label: "Relevance" },
+  { Component: Slide10Credits, time: "~0.5 min", label: "Credits" },
+];
+
+export default function Presentation() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRefs = useRef<(HTMLElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.getAttribute("data-index"));
+            if (!isNaN(index)) setActiveSlide(index);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    sectionRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowDown" || e.key === "ArrowRight" || e.key === " ") {
+        e.preventDefault();
+        scrollToSlide(Math.min(activeSlide + 1, slidesData.length - 1));
+      } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+        e.preventDefault();
+        scrollToSlide(Math.max(activeSlide - 1, 0));
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [activeSlide]);
+
+  const scrollToSlide = (index: number) => {
+    if (sectionRefs.current[index]) {
+      sectionRefs.current[index]?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const progress = ((activeSlide) / (slidesData.length - 1)) * 100;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main className="relative w-full h-screen overflow-hidden bg-background">
+      {/* Progress Bar */}
+      <div className="absolute top-0 left-0 h-1 bg-gray-200 w-full z-50">
+        <div 
+          className="h-full bg-primary transition-all duration-300 ease-out"
+          style={{ width: `${progress}%` }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      </div>
+
+      {/* Top Info Bar (Slide Number) */}
+      <div className="absolute top-6 left-6 z-50 bg-white/80 backdrop-blur px-4 py-2 rounded-full shadow-sm border border-gray-100 flex items-center">
+        <span className="font-bold text-primary">Slide {activeSlide + 1}/{slidesData.length}</span>
+      </div>
+
+      {/* Sidebar Navigation Dots */}
+      <div className="absolute right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3">
+        {slidesData.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => scrollToSlide(idx)}
+            className="group relative flex items-center justify-end"
+            aria-label={`Go to slide ${idx + 1}`}
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            <div className={cn(
+              "absolute right-6 px-2 py-1 rounded bg-black/80 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity mr-2 pointer-events-none",
+              activeSlide === idx && "font-bold text-primary"
+            )}>
+              {slidesData[idx].label}
+            </div>
+            <div className={cn(
+              "w-3 h-3 rounded-full transition-all duration-300 border-2",
+              activeSlide === idx 
+                ? "bg-primary border-primary scale-125" 
+                : "bg-transparent border-gray-400 hover:border-primary"
+            )} />
+          </button>
+        ))}
+      </div>
+
+      {/* Main Slides Container */}
+      <div 
+        ref={containerRef}
+        className="slides-container"
+      >
+        {slidesData.map((slide, idx) => {
+          const SlideComponent = slide.Component;
+          return (
+            <section
+              key={idx}
+              data-index={idx}
+              ref={(el) => { sectionRefs.current[idx] = el; }}
+              className="slide-section"
+            >
+              <SlideComponent />
+            </section>
+          );
+        })}
+      </div>
+    </main>
   );
 }
