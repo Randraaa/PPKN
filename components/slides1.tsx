@@ -12,7 +12,7 @@ const slideVariants = {
 export const Slide1Cover = () => (
   <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={slideVariants} className="flex flex-col items-center justify-center h-full text-center px-4">
     <div className="mb-8 relative w-40 h-40 md:w-56 md:h-56">
-      <img src="/assets/garuda.png" alt="Garuda Pancasila" className="w-full h-full object-contain drop-shadow-xl" />
+      <img src="/assets/Garuda.png" alt="Garuda Pancasila" className="w-full h-full object-contain drop-shadow-xl" />
     </div>
     <h1 className="font-serif font-black text-5xl md:text-7xl lg:text-8xl uppercase tracking-tighter text-primary mb-4 max-w-5xl leading-none">
       Youth Pledge 1928 <br/> <span className="text-foreground">and Indonesia Raya</span>
