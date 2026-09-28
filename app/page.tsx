@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { Quote, Play, Pause, SkipBack, SkipForward, Volume2, BookOpen, Music, Users, MessageCircle, Anchor, ChevronRight } from "lucide-react";
+import { Quote, Play, Pause, SkipBack, SkipForward, BookOpen, Music, Users, MessageCircle, Anchor, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) => (
@@ -36,14 +36,14 @@ const Navbar = () => {
       )}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
           <div className="font-serif font-bold text-xl tracking-tight text-gray-900">
-            Sumpah<span className="text-[#C8102E]">Pemuda</span>
+            Youth<span className="text-[#C8102E]">Pledge</span>
           </div>
           <div className="hidden md:flex gap-8 text-sm font-medium text-gray-600">
-            <a href="#latar-belakang" className="hover:text-[#C8102E] transition-colors">Latar Belakang</a>
-            <a href="#kongres" className="hover:text-[#C8102E] transition-colors">Kongres II</a>
-            <a href="#ikrar" className="hover:text-[#C8102E] transition-colors">Ikrar</a>
-            <a href="#indonesia-raya" className="hover:text-[#C8102E] transition-colors">Indonesia Raya</a>
-            <a href="#tokoh" className="hover:text-[#C8102E] transition-colors">Tokoh</a>
+            <a href="#background" className="hover:text-[#C8102E] transition-colors">Background</a>
+            <a href="#congress" className="hover:text-[#C8102E] transition-colors">The Congress</a>
+            <a href="#pledge" className="hover:text-[#C8102E] transition-colors">The Pledge</a>
+            <a href="#anthem" className="hover:text-[#C8102E] transition-colors">Anthem</a>
+            <a href="#figures" className="hover:text-[#C8102E] transition-colors">Key Figures</a>
           </div>
         </div>
       </nav>
@@ -58,7 +58,7 @@ const Hero = () => (
     
     <FadeIn delay={0.1}>
       <span className="inline-block py-1 px-3 rounded-full bg-red-100 text-[#C8102E] text-xs font-semibold tracking-widest uppercase mb-6">
-        Sejarah Pergerakan Nasional
+        History of the National Movement
       </span>
     </FadeIn>
     
@@ -66,13 +66,13 @@ const Hero = () => (
       <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 leading-[1.1] mb-6">
         Youth Pledge 1928 &<br/>
         <span className="text-[#C8102E]">Indonesia Raya:</span><br/>
-        Tonggak Persatuan Bangsa<sup className="text-2xl text-gray-400 ml-2">[2, 3]</sup>
+        A Milestone of National Unity<sup className="text-2xl text-gray-400 ml-2">[2, 3]</sup>
       </h1>
     </FadeIn>
     
     <FadeIn delay={0.3} className="max-w-2xl mx-auto">
       <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-12">
-        Peran Pemuda, Makna Sumpah Pemuda 1928, dan Sejarah Lahirnya Lagu Kebangsaan Indonesia Raya<sup className="text-sm text-gray-400 ml-1">[2, 3]</sup>
+        The Role of Youth, the Meaning of the 1928 Youth Pledge, and the History of the Indonesian National Anthem<sup className="text-sm text-gray-400 ml-1">[2, 3]</sup>
       </p>
     </FadeIn>
 
@@ -81,7 +81,10 @@ const Hero = () => (
         <Quote size={64} className="opacity-50" />
       </div>
       <blockquote className="relative z-10 p-8 rounded-2xl bg-white/60 backdrop-blur-sm border border-gray-100 shadow-xl shadow-gray-200/20">
-        <p className="font-serif text-2xl md:text-3xl italic text-gray-800 leading-snug mb-6">
+        <p className="font-serif text-2xl md:text-3xl font-medium text-gray-800 leading-snug mb-2">
+          "Politics is not an instrument of power, but an ethic to serve."
+        </p>
+        <p className="font-serif text-lg italic text-gray-500 mb-6">
           "Politik bukan alat kekuasaan, tetapi etika untuk melayani."
         </p>
         <footer className="flex items-center justify-center gap-4">
@@ -94,29 +97,29 @@ const Hero = () => (
 );
 
 const BackgroundSection = () => (
-  <section id="latar-belakang" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+  <section id="background" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
       <div>
         <FadeIn>
           <div className="flex items-center gap-3 mb-6">
             <BookOpen className="text-[#C8102E]" size={24} />
-            <h2 className="font-serif text-4xl font-bold text-gray-900">Latar Belakang Historis</h2>
+            <h2 className="font-serif text-4xl font-bold text-gray-900">Historical Background</h2>
           </div>
         </FadeIn>
         
         <FadeIn delay={0.1}>
           <p className="text-lg text-gray-600 leading-relaxed mb-6">
-            Pemuda adalah aktor terpenting dalam sejarah pergerakan nasional yang berawal dari kegelisahan terhadap kolonialisme<sup className="text-sm text-gray-400 ml-1">[3]</sup>.
+            Youth were the most crucial actors in realizing Indonesian independence, driven by their restlessness against colonial oppression<sup className="text-sm text-gray-400 ml-1">[3]</sup>.
           </p>
           <p className="text-lg text-gray-600 leading-relaxed">
-            Terjadi transisi besar dari gerakan yang bersifat kedaerahan menuju kesatuan nasional. Semangat persatuan ini juga diinspirasi oleh pergerakan Perhimpunan Indonesia di Belanda<sup className="text-sm text-gray-400 ml-1">[2, 3]</sup>.
+            There was a significant transition from regional organizations to a unified national movement. This spirit of unity was also inspired by the Perhimpunan Indonesia movement in the Netherlands<sup className="text-sm text-gray-400 ml-1">[2, 3]</sup>.
           </p>
         </FadeIn>
       </div>
 
       <div className="space-y-6">
         <FadeIn delay={0.2} className="p-8 rounded-2xl bg-white shadow-sm border border-gray-100">
-          <h3 className="font-bold text-gray-900 mb-4 text-lg">Dari Kedaerahan Menuju Kesatuan:</h3>
+          <h3 className="font-bold text-gray-900 mb-4 text-lg">From Regional to National:</h3>
           <div className="flex flex-wrap gap-2">
             {['Budi Utomo', 'PPPI', 'Jong Java', 'Jong Sumatranen Bond', 'Jong Bataks Bond', 'Jong Islamieten Bond', 'Jong Celebes', 'Pemuda Kaum Betawi', 'Sekar Roekoen', 'Jong Minahasa', 'Jong Ambon'].map(org => (
               <span key={org} className="px-3 py-1.5 bg-gray-50 border border-gray-100 rounded-full text-sm font-medium text-gray-700">
@@ -127,18 +130,18 @@ const BackgroundSection = () => (
         </FadeIn>
         
         <FadeIn delay={0.3} className="p-8 rounded-2xl bg-[#C8102E] text-white shadow-lg">
-          <h3 className="font-serif font-bold text-xl mb-6">Tujuan Kongres Pemuda II<sup className="text-sm text-white/70 ml-1">[3]</sup></h3>
+          <h3 className="font-serif font-bold text-xl mb-6">3 Goals of the Youth Congress<sup className="text-sm text-white/70 ml-1">[3]</sup></h3>
           <ul className="space-y-4">
             {[
-              "Mewujudkan cita-cita seluruh pemuda Indonesia.",
-              "Membahas permasalahan gerakan pemuda.",
-              "Memperkuat kesadaran kebangsaan dan persatuan."
+              "To express the dreams of all Indonesian youth.",
+              "To discuss problems within the youth movement.",
+              "To strengthen national awareness and Indonesian unity."
             ].map((goal, idx) => (
               <li key={idx} className="flex items-start gap-4">
                 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold">
                   {idx + 1}
                 </span>
-                <span className="leading-relaxed">{goal}</span>
+                <span className="leading-relaxed font-medium">{goal}</span>
               </li>
             ))}
           </ul>
@@ -151,38 +154,38 @@ const BackgroundSection = () => (
 const Timeline = () => {
   const sessions = [
     {
-      date: "Sesi 1 (27 Okt 1928)",
-      location: "Gedung Katholieke Jongelingen Bond",
-      desc: 'Membahas "Persatuan dan Kebangsaan Indonesia" oleh Moh. Yamin. Menyebutkan 5 faktor persatuan: sejarah, bahasa, hukum adat, pendidikan, kemauan.',
+      date: "Session 1 (Oct 27, 1928)",
+      location: "Katholieke Jongelingen Bond Building",
+      desc: "Mohammad Yamin discussed 'Unity and Indonesian Nationality' and 5 strengthening factors (history, language, customary law, education, and will).",
       icon: <Users className="text-white" size={20} />
     },
     {
-      date: "Sesi 2 (28 Okt 1928)",
-      location: "Gedung Oost-Java Bioscoop",
-      desc: "Nona Purnomowulan & Ki Hadjar Dewantara membahas pentingnya pendidikan demokratis dan seimbang bagi pemuda.",
+      date: "Session 2 (Oct 28, 1928)",
+      location: "Oost-Java Bioscoop Building",
+      desc: "Miss Purnomo Wulan and Ki Hajar Dewantara highlighted the importance of democratic and balanced education for all children.",
       icon: <BookOpen className="text-white" size={20} />
     },
     {
-      date: "Sesi 3 (28 Okt 1928)",
-      location: "Gedung Indonesische Clubgebouw",
-      desc: "Ramelan & Sunario membahas pentingnya Kepanduan (Scouting) untuk menanamkan kedisiplinan dan nasionalisme sejak dini.",
+      date: "Session 3 (Oct 28, 1928)",
+      location: "Indonesische Clubgebouw, Kramat 106",
+      desc: "Ramelan and Sunario emphasized that Scouting (Kepanduan) fosters discipline, independence, and nationalism from an early age. Note that this is the historical building where the pledge was read and the anthem was first played.",
       icon: <Anchor className="text-white" size={20} />
     }
   ];
 
   return (
-    <section id="kongres" className="py-24 bg-white">
+    <section id="congress" className="py-24 bg-white">
       <div className="max-w-4xl mx-auto px-6 md:px-12">
         <FadeIn className="text-center mb-16">
-          <h2 className="font-serif text-4xl font-bold text-gray-900 mb-6">Rangkaian Kongres Pemuda II</h2>
-          <div className="flex flex-wrap justify-center gap-4 text-sm font-medium text-gray-700 bg-gray-50 p-4 rounded-xl inline-flex border border-gray-100">
-            <span><strong className="text-gray-900">Ketua:</strong> Sugondo Djoyopuspito</span>
-            <span className="text-gray-300">|</span>
-            <span><strong className="text-gray-900">Wakil:</strong> Djoko Marsaid</span>
-            <span className="text-gray-300">|</span>
-            <span><strong className="text-gray-900">Sekretaris:</strong> Mohammad Yamin</span>
-            <span className="text-gray-300">|</span>
-            <span><strong className="text-gray-900">Bendahara:</strong> Amir Sjarifoeddin</span>
+          <h2 className="font-serif text-4xl font-bold text-gray-900 mb-6">The Second Youth Congress</h2>
+          <div className="flex flex-wrap justify-center gap-4 text-sm font-medium text-gray-700 bg-gray-50 p-4 rounded-xl inline-flex border border-gray-100 leading-relaxed">
+            <span><strong className="text-gray-900">Chairman:</strong> Sugondo Djoyopuspito</span>
+            <span className="text-gray-300 hidden md:inline">|</span>
+            <span><strong className="text-gray-900">Vice Chairman:</strong> Djoko Marsaid</span>
+            <span className="text-gray-300 hidden md:inline">|</span>
+            <span><strong className="text-gray-900">Secretary:</strong> Mohammad Yamin</span>
+            <span className="text-gray-300 hidden md:inline">|</span>
+            <span><strong className="text-gray-900">Treasurer:</strong> Amir Sjarifoeddin</span>
             <sup className="text-gray-400">[2, 3]</sup>
           </div>
         </FadeIn>
@@ -219,136 +222,231 @@ const Timeline = () => {
 };
 
 const PledgeSection = () => (
-  <section id="ikrar" className="relative py-32 bg-[#1A1A1A] text-white overflow-hidden">
+  <section id="pledge" className="relative py-32 bg-[#1A1A1A] text-white overflow-hidden">
     <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
-    <div className="max-w-5xl mx-auto px-6 md:px-12 relative z-10">
+    <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
       <FadeIn>
         <h2 className="font-serif text-5xl md:text-7xl text-center font-bold mb-20 tracking-tight">
-          Ikrar Sumpah Pemuda
+          The Youth Pledge
         </h2>
       </FadeIn>
       
-      <div className="space-y-12 max-w-3xl mx-auto font-serif text-2xl md:text-4xl leading-snug">
+      <div className="space-y-16 max-w-4xl mx-auto">
         <FadeIn delay={0.2} className="flex gap-6 md:gap-8">
-          <span className="text-[#C8102E] font-bold">1.</span>
-          <p>Kami putra dan putri Indonesia, mengaku bertumpah darah yang satu, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">tanah Indonesia.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup></p>
+          <span className="font-serif text-[#C8102E] font-bold text-3xl md:text-5xl">1.</span>
+          <div>
+            <p className="font-serif text-2xl md:text-4xl leading-snug mb-3">
+              We the sons and daughters of Indonesia, acknowledge one motherland, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">Indonesia.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup>
+            </p>
+            <p className="text-lg md:text-xl text-gray-400 italic">
+              (Kami putra dan putri Indonesia, mengaku bertumpah darah yang satu, tanah Indonesia.)
+            </p>
+          </div>
         </FadeIn>
+        
         <FadeIn delay={0.4} className="flex gap-6 md:gap-8">
-          <span className="text-[#C8102E] font-bold">2.</span>
-          <p>Kami putra dan putri Indonesia, mengaku berbangsa yang satu, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">bangsa Indonesia.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup></p>
+          <span className="font-serif text-[#C8102E] font-bold text-3xl md:text-5xl">2.</span>
+          <div>
+            <p className="font-serif text-2xl md:text-4xl leading-snug mb-3">
+              We the sons and daughters of Indonesia, acknowledge one nation, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">the nation of Indonesia.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup>
+            </p>
+            <p className="text-lg md:text-xl text-gray-400 italic">
+              (Kami putra dan putri Indonesia, mengaku berbangsa yang satu, bangsa Indonesia.)
+            </p>
+          </div>
         </FadeIn>
+        
         <FadeIn delay={0.6} className="flex gap-6 md:gap-8">
-          <span className="text-[#C8102E] font-bold">3.</span>
-          <p>Kami putra dan putri Indonesia, menjunjung bahasa persatuan, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">bahasa Indonesia.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup></p>
+          <span className="font-serif text-[#C8102E] font-bold text-3xl md:text-5xl">3.</span>
+          <div>
+            <p className="font-serif text-2xl md:text-4xl leading-snug mb-3">
+              We the sons and daughters of Indonesia, respect the language of unity, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">Indonesian.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup>
+            </p>
+            <p className="text-lg md:text-xl text-gray-400 italic">
+              (Kami putra dan putri Indonesia, menjunjung bahasa persatuan, bahasa Indonesia.)
+            </p>
+          </div>
         </FadeIn>
       </div>
     </div>
   </section>
 );
 
-const AnthemSection = () => (
-  <section id="indonesia-raya" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
-    <FadeIn className="text-center mb-16">
-      <Music className="text-[#C8102E] mx-auto mb-6" size={40} />
-      <h2 className="font-serif text-4xl font-bold text-gray-900 mb-6">Sejarah "Indonesia Raya"</h2>
-    </FadeIn>
+const AnthemSection = () => {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
 
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-16">
-      <div className="space-y-8 text-lg text-gray-600 leading-relaxed">
-        <FadeIn delay={0.1}>
-          <p>
-            <strong className="text-gray-900">W.R. Supratman</strong> adalah jurnalis <em>Sin Po</em> yang memperdengarkan lagu ini pertama kali dengan biola pada penutupan kongres 28 Oktober 1928, dan dinyanyikan oleh Dolly Salim<sup className="text-sm text-gray-400 ml-1">[3]</sup>.
-          </p>
-        </FadeIn>
-        <FadeIn delay={0.2}>
-          <p>
-            Rekaman piringan hitam pertama dilakukan oleh <strong>NV Kuchenmeister’s Internationale Ultraphoon Maatschappij Amsterdam</strong> pada 30 Oktober 1930 dengan judul <em>"Indonesia Rajah"</em><sup className="text-sm text-gray-400 ml-1">[3]</sup>.
-          </p>
-        </FadeIn>
-        <FadeIn delay={0.3}>
-          <p className="bg-red-50 text-[#C8102E] p-4 rounded-xl border border-red-100">
-            Belanda menyadari dampak politis lagu ini dan merespons dengan <strong>melarang lagu ini dinyanyikan</strong> secara publik pada tahun 1930<sup className="text-sm text-red-300 ml-1">[3]</sup>.
-          </p>
-        </FadeIn>
-      </div>
+  const togglePlay = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => setIsPlaying(true))
+            .catch((error) => {
+              console.error("Audio playback failed:", error);
+              setIsPlaying(false);
+            });
+        }
+      }
+    }
+  };
 
-      <FadeIn delay={0.4} className="bg-white rounded-3xl p-8 shadow-xl shadow-gray-200/50 border border-gray-100 flex flex-col justify-between">
-        <div>
-          <h3 className="font-bold text-gray-900 mb-6 text-xl">Perbandingan Lirik (Reff)</h3>
-          <div className="grid grid-cols-2 gap-6 mb-8">
-            <div className="space-y-3">
-              <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block">Versi 1928</span>
-              <p className="font-serif text-gray-900 italic">"Moelia, moelia...<br/>Tanahkoe, neg'rikoe jang koetjinta"</p>
-              <span className="text-sm text-gray-500 block mt-2">Birama 6/8</span>
-            </div>
-            <div className="space-y-3">
-              <span className="text-xs font-bold text-[#C8102E] uppercase tracking-widest block">Versi 1944 (Panitia Ir. Soekarno)</span>
-              <p className="font-serif text-gray-900 font-bold italic">"Merdeka, merdeka...<br/>Tanahku, neg'riku yang kucinta"</p>
-              <span className="text-sm text-gray-500 block mt-2">Birama 4/4</span>
-            </div>
-          </div>
-          <p className="text-sm text-gray-400 text-right w-full block">[cite: 2, 3]</p>
-        </div>
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      const current = audioRef.current.currentTime;
+      const total = audioRef.current.duration;
+      setProgress(total && isFinite(total) ? (current / total) * 100 : 0);
+    }
+  };
 
-        {/* Audio Player Mockup */}
-        <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 mt-6">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <p className="font-bold text-gray-900">Indonesia Raya</p>
-              <p className="text-sm text-gray-500">W.R. Supratman (1928)</p>
-            </div>
-            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm text-gray-400">
-              <Music size={16} />
-            </div>
-          </div>
-          <div className="flex items-center gap-4 text-gray-700">
-            <button className="hover:text-[#C8102E] transition-colors"><SkipBack size={20} /></button>
-            <button className="w-12 h-12 rounded-full bg-[#C8102E] text-white flex items-center justify-center hover:scale-105 transition-transform shadow-md shadow-red-500/30">
-              <Play size={24} className="ml-1" />
-            </button>
-            <button className="hover:text-[#C8102E] transition-colors"><SkipForward size={20} /></button>
-            
-            <div className="flex-1 ml-4 flex items-center gap-3 text-xs font-medium text-gray-400">
-              <span>0:00</span>
-              <div className="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                <div className="w-0 h-full bg-[#C8102E]"></div>
-              </div>
-              <span>-3:15</span>
-            </div>
-          </div>
-        </div>
+  return (
+    <section id="anthem" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+      <FadeIn className="text-center mb-16">
+        <Music className="text-[#C8102E] mx-auto mb-6" size={40} />
+        <h2 className="font-serif text-4xl font-bold text-gray-900 mb-6">History of "Indonesia Raya"</h2>
       </FadeIn>
-    </div>
-  </section>
-);
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-16">
+        <div className="space-y-8 text-lg text-gray-600 leading-relaxed">
+          <FadeIn delay={0.1}>
+            <p>
+              <strong className="text-gray-900">W.R. Supratman</strong>, a <em>Sin Po</em> journalist, first played the anthem on his violin on October 28, 1928, and it was sung by Dolly Salim<sup className="text-sm text-gray-400 ml-1">[3]</sup>.
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.2}>
+            <p>
+              The first vinyl record was printed on October 30, 1930, by <strong>NV Kuchenmeister’s Internationale Ultraphoon Maatschappij Amsterdam</strong> under the title <em>"Indonesia Rajah"</em><sup className="text-sm text-gray-400 ml-1">[3]</sup>.
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.3}>
+            <p className="bg-red-50 text-[#C8102E] p-4 rounded-xl border border-red-100">
+              The Dutch government <strong>banned the song in public in 1930</strong> because they feared its political impact and influence on the independence movement<sup className="text-sm text-red-300 ml-1">[3]</sup>.
+            </p>
+          </FadeIn>
+        </div>
+
+        <FadeIn delay={0.4} className="bg-white rounded-3xl p-8 shadow-xl shadow-gray-200/50 border border-gray-100 flex flex-col justify-between">
+          <div>
+            <h3 className="font-bold text-gray-900 mb-6 text-xl">Lyrics Comparison (Chorus)</h3>
+            <div className="grid grid-cols-2 gap-6 mb-8">
+              <div className="space-y-3">
+                <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block">1928 Original</span>
+                <p className="font-serif text-gray-900 italic">"Moelia, moelia...<br/>Tanahkoe, neg'rikoe jang koetjinta"</p>
+                <span className="text-sm text-gray-500 block mt-2">6/8 Beat</span>
+              </div>
+              <div className="space-y-3">
+                <span className="text-xs font-bold text-[#C8102E] uppercase tracking-widest block">1944 Official (Sukarno's Comm.)</span>
+                <p className="font-serif text-gray-900 font-bold italic">"Merdeka, merdeka...<br/>Tanahku, neg'riku yang kucinta"</p>
+                <span className="text-sm text-gray-500 block mt-2">4/4 Beat</span>
+              </div>
+            </div>
+            <p className="text-sm text-gray-400 text-right w-full block">[cite: 2, 3]</p>
+          </div>
+
+          {/* Working Audio Player Component */}
+          <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 mt-6 relative">
+            <audio 
+              ref={audioRef} 
+              src="/indonesia-raya.mp3" 
+              onTimeUpdate={handleTimeUpdate}
+              onEnded={() => setIsPlaying(false)}
+            />
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <p className="font-bold text-gray-900">Indonesia Raya</p>
+                <p className="text-sm text-gray-500">W.R. Supratman (1928)</p>
+              </div>
+              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm text-[#C8102E]">
+                <Music size={16} />
+              </div>
+            </div>
+            <div className="flex items-center gap-4 text-gray-700">
+              <button 
+                onClick={() => { if(audioRef.current && isFinite(audioRef.current.duration)) audioRef.current.currentTime = 0; }} 
+                className="hover:text-[#C8102E] transition-colors"
+                aria-label="Restart"
+              >
+                <SkipBack size={20} />
+              </button>
+              
+              <button 
+                onClick={togglePlay}
+                className="w-12 h-12 rounded-full bg-[#C8102E] text-white flex items-center justify-center hover:scale-105 transition-transform shadow-md shadow-red-500/30"
+                aria-label={isPlaying ? "Pause" : "Play"}
+              >
+                {isPlaying ? <Pause size={24} /> : <Play size={24} className="ml-1" />}
+              </button>
+              
+              <button 
+                onClick={() => { if(audioRef.current && isFinite(audioRef.current.duration)) audioRef.current.currentTime = Math.min(audioRef.current.currentTime + 10, audioRef.current.duration); }} 
+                className="hover:text-[#C8102E] transition-colors"
+                aria-label="Skip Forward 10s"
+              >
+                <SkipForward size={20} />
+              </button>
+              
+              <div className="flex-1 ml-4 flex items-center gap-3 text-xs font-medium text-gray-400">
+                <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden cursor-pointer"
+                     onClick={(e) => {
+                       if (audioRef.current && isFinite(audioRef.current.duration) && audioRef.current.duration > 0) {
+                         const rect = e.currentTarget.getBoundingClientRect();
+                         const pos = (e.clientX - rect.left) / rect.width;
+                         audioRef.current.currentTime = pos * audioRef.current.duration;
+                       }
+                     }}>
+                  <div 
+                    className="h-full bg-[#C8102E] transition-all duration-150 ease-out"
+                    style={{ width: `${progress}%` }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
 
 const FiguresSection = () => {
   const figures = [
-    { name: "W.R. Supratman", role: "Komponis & Jurnalis" },
-    { name: "Mohammad Yamin", role: "Perumus Teks Sumpah Pemuda" },
-    { name: "Sugondo Djoyopuspito", role: "Ketua Kongres Pemuda II" },
-    { name: "Amir Sjarifoeddin", role: "Bendahara (Kelak menjadi PM RI)" },
-    { name: "Johannes Leimena", role: "Tokoh Pemuda & Nasionalis" },
-    { name: "Nona Purnomowulan / Dolly Salim", role: "Perwakilan Perempuan & Penyanyi Pertama" }
+    { name: "W.R. Supratman", role: "Composer of the national anthem & journalist." },
+    { name: "Mohammad Yamin", role: "Drafter of the Youth Pledge text." },
+    { name: "Sugondo Djoyopuspito", role: "Chairman of the Second Youth Congress." },
+    { name: "Amir Sjarifoeddin", role: "Treasurer of the Congress & anti-fascist figure who became Prime Minister." },
+    { name: "Johannes Leimena", role: "Jong Ambon figure advocating ethical politics." }
   ];
 
   return (
-    <section id="tokoh" className="py-24 bg-white">
+    <section id="figures" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <FadeIn className="text-center mb-16">
-          <h2 className="font-serif text-4xl font-bold text-gray-900 mb-4">Tokoh Utama<sup className="text-xl text-gray-400 ml-1">[1, 2, 3]</sup></h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">Para pemuda dan pemudi yang menjadi motor penggerak lahirnya Sumpah Pemuda dan lagu kebangsaan.</p>
+          <h2 className="font-serif text-4xl font-bold text-gray-900 mb-4">Key Figures<sup className="text-xl text-gray-400 ml-1">[1, 2, 3]</sup></h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">The youths and prominent figures who became the driving force behind the birth of the Youth Pledge and the national anthem.</p>
         </FadeIn>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6">
           {figures.map((fig, idx) => (
-            <FadeIn key={idx} delay={idx * 0.1} className="group cursor-default">
+            <FadeIn 
+              key={idx} 
+              delay={idx * 0.1} 
+              className={cn(
+                "group cursor-default md:col-span-2 lg:col-span-2",
+                idx === 3 && "lg:col-start-2",
+                idx === 4 && "md:col-start-2 lg:col-start-auto"
+              )}
+            >
               <div className="p-8 rounded-2xl bg-[#F9F6F0] border border-gray-100 hover:border-[#C8102E]/30 hover:bg-white hover:shadow-xl hover:-translate-y-2 transition-all duration-300 h-full flex flex-col justify-center relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
                   <Users size={64} />
                 </div>
                 <h3 className="font-serif font-bold text-xl text-gray-900 mb-2 relative z-10">{fig.name}</h3>
-                <p className="text-[#C8102E] font-medium text-sm relative z-10">{fig.role}</p>
+                <p className="text-[#C8102E] font-medium text-sm relative z-10 leading-relaxed">{fig.role}</p>
               </div>
             </FadeIn>
           ))}
@@ -363,26 +461,26 @@ const Footer = () => (
     <div className="max-w-5xl mx-auto px-6 md:px-12 text-center">
       <FadeIn>
         <MessageCircle size={48} className="mx-auto text-gray-700 mb-8" />
-        <h2 className="font-serif text-3xl font-bold mb-12">Diskusi & Refleksi</h2>
+        <h2 className="font-serif text-3xl font-bold mb-12">Discussion & Reflection</h2>
         
         <div className="space-y-6 text-left max-w-3xl mx-auto">
           <div className="p-6 rounded-2xl bg-gray-800 border border-gray-700 flex gap-4 items-start">
             <span className="text-[#C8102E] font-bold text-xl">Q1.</span>
             <p className="text-lg leading-relaxed">
-              Bagaimana Sumpah Pemuda 1928 memengaruhi pergerakan kemerdekaan Indonesia?<sup className="text-xs text-gray-500 ml-1">[2]</sup>
+              How did the Youth Pledge influence subsequent independence movements in Indonesia?<sup className="text-xs text-gray-500 ml-1">[2]</sup>
             </p>
           </div>
           <div className="p-6 rounded-2xl bg-gray-800 border border-gray-700 flex gap-4 items-start">
             <span className="text-[#C8102E] font-bold text-xl">Q2.</span>
             <p className="text-lg leading-relaxed">
-              Bagaimana perbandingan antara Sumpah Pemuda dengan gerakan pemuda di belahan dunia lainnya?<sup className="text-xs text-gray-500 ml-1">[2]</sup>
+              What parallels can be drawn between the Youth Pledge and other youth-led movements worldwide?<sup className="text-xs text-gray-500 ml-1">[2]</sup>
             </p>
           </div>
         </div>
       </FadeIn>
       
       <div className="mt-24 pt-8 border-t border-gray-800 text-sm text-gray-500">
-        <p>&copy; {new Date().getFullYear()} PPKN Presentation | Sumpah Pemuda & Indonesia Raya</p>
+        <p>&copy; {new Date().getFullYear()} Youth Pledge 1928 Presentation | Western Sydney University</p>
       </div>
     </div>
   </footer>
