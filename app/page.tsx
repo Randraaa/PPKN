@@ -362,45 +362,48 @@ const AnthemSection = () => {
           </FadeIn>
         </div>
 
-        <FadeIn delay={0.4} className="bg-white rounded-3xl p-8 shadow-xl shadow-gray-200/50 border border-gray-100 flex flex-col justify-between">
-          <div>
-            <h3 className="font-bold text-gray-900 mb-6 text-xl">Lyrics Comparison (Chorus)</h3>
-            <div className="grid grid-cols-2 gap-6 mb-8">
-              <div className="space-y-3">
-                <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block">1928 Original</span>
-                <p className="font-serif text-gray-900 italic">"Moelia, moelia...<br/>Tanahkoe, neg'rikoe jang koetjinta"</p>
-                <span className="text-sm text-gray-500 block mt-2">6/8 Beat</span>
-              </div>
-              <div className="space-y-3">
-                <span className="text-xs font-bold text-[#C8102E] uppercase tracking-widest block">1944 Official (Sukarno's Comm.)</span>
-                <p className="font-serif text-gray-900 font-bold italic">"Merdeka, merdeka...<br/>Tanahku, neg'riku yang kucinta"</p>
-                <span className="text-sm text-gray-500 block mt-2">4/4 Beat</span>
-              </div>
-            </div>
-            <p className="text-sm text-gray-400 text-right w-full block mb-6">[cite: 2, 3]</p>
-          </div>
-
-          <div className="flex flex-col gap-4 mt-auto">
+        <FadeIn delay={0.4} className="bg-white rounded-2xl shadow-lg border border-gray-100 flex flex-col justify-between overflow-hidden relative">
+          {/* Background Image Area (Image Overlay with Gradient) */}
+          <div className="relative flex-1 flex flex-col justify-end min-h-[350px]">
             <img 
               src="/images/sinpo-score.jpg" 
               alt="Sin Po Original Score" 
-              className="w-full h-32 md:h-48 object-cover object-top rounded-xl shadow-sm grayscale hover:grayscale-0 transition-all duration-300" 
+              className="absolute inset-0 w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-500" 
             />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90 pointer-events-none"></div>
+            
+            <div className="relative z-10 p-8 h-full flex flex-col">
+              <h3 className="font-bold text-white mb-6 text-xl drop-shadow-md">Lyrics Comparison (Chorus)</h3>
+              <div className="grid grid-cols-2 gap-6 mb-8 flex-1">
+                <div className="space-y-3">
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block drop-shadow">1928 Original</span>
+                  <p className="font-serif text-gray-100 italic drop-shadow-sm">"Moelia, moelia...<br/>Tanahkoe, neg'rikoe jang koetjinta"</p>
+                  <span className="text-sm text-gray-400 block mt-2 drop-shadow">6/8 Beat</span>
+                </div>
+                <div className="space-y-3">
+                  <span className="text-xs font-bold text-red-400 uppercase tracking-widest block drop-shadow">1944 Official (Sukarno's Comm.)</span>
+                  <p className="font-serif text-white font-bold italic drop-shadow-sm">"Merdeka, merdeka...<br/>Tanahku, neg'riku yang kucinta"</p>
+                  <span className="text-sm text-gray-400 block mt-2 drop-shadow">4/4 Beat</span>
+                </div>
+              </div>
+              <p className="text-sm text-gray-500 text-right w-full block drop-shadow">[cite: 2, 3]</p>
+            </div>
+          </div>
 
-            {/* Working Audio Player Component */}
-            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 relative">
-              <audio 
-                ref={audioRef} 
-                src="/indonesia-raya.mp3" 
-                onTimeUpdate={handleTimeUpdate}
-                onEnded={() => setIsPlaying(false)}
-              />
+          {/* Working Audio Player Component */}
+          <div className="bg-white p-6 md:p-8 relative z-20 border-t border-gray-100">
+            <audio 
+              ref={audioRef} 
+              src="/indonesia-raya.mp3" 
+              onTimeUpdate={handleTimeUpdate}
+              onEnded={() => setIsPlaying(false)}
+            />
             <div className="flex items-center justify-between mb-4">
               <div>
                 <p className="font-bold text-gray-900">Indonesia Raya</p>
                 <p className="text-sm text-gray-500">W.R. Supratman (1928)</p>
               </div>
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm text-[#C8102E]">
+              <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center shadow-sm text-[#C8102E] border border-gray-100">
                 <Music size={16} />
               </div>
             </div>
@@ -445,7 +448,6 @@ const AnthemSection = () => {
                 </div>
               </div>
             </div>
-          </div>
           </div>
         </FadeIn>
       </div>
