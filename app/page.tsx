@@ -195,22 +195,44 @@ const Timeline = () => {
           
           <div className="space-y-12 relative">
             {sessions.map((session, idx) => (
-              <FadeIn key={idx} delay={idx * 0.2} className={cn(
-                "relative md:w-1/2",
-                idx % 2 === 0 ? "md:pr-12 md:ml-0" : "md:pl-12 md:ml-auto"
-              )}>
-                <div className={cn(
-                  "absolute top-6 w-10 h-10 rounded-full bg-[#C8102E] flex items-center justify-center shadow-lg shadow-red-500/20 z-10",
-                  "left-[-29px] md:left-auto",
-                  idx % 2 === 0 ? "md:-right-5" : "md:-left-5"
-                )}>
+              <FadeIn key={idx} delay={idx * 0.2} className="relative w-full flex flex-col md:flex-row items-center">
+                {/* Central Dot - Desktop */}
+                <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[#C8102E] items-center justify-center shadow-lg shadow-red-500/20 z-10">
+                  {session.icon}
+                </div>
+
+                {/* Central Dot - Mobile */}
+                <div className="md:hidden absolute top-6 left-[-29px] w-10 h-10 rounded-full bg-[#C8102E] flex items-center justify-center shadow-lg shadow-red-500/20 z-10">
                   {session.icon}
                 </div>
                 
-                <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ml-8 md:ml-0">
-                  <span className="text-sm font-bold text-[#C8102E] tracking-wider uppercase mb-2 block">{session.date}</span>
-                  <h3 className="font-serif font-bold text-xl text-gray-900 mb-3">{session.location}</h3>
-                  <p className="text-gray-600 leading-relaxed">{session.desc}<sup className="text-xs text-gray-400 ml-1">[3]</sup></p>
+                {/* Text Content */}
+                <div className={cn(
+                  "w-full md:w-1/2",
+                  idx % 2 === 0 ? "md:pr-12" : "md:pl-12 md:order-2"
+                )}>
+                  <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ml-8 md:ml-0">
+                    <img 
+                      src={`/images/session${idx + 1}.jpg`}
+                      alt={`Session ${idx + 1}`}
+                      className="w-full aspect-video object-cover rounded-lg shadow-md mb-6 md:hidden grayscale hover:grayscale-0 transition-all duration-300"
+                    />
+                    <span className="text-sm font-bold text-[#C8102E] tracking-wider uppercase mb-2 block">{session.date}</span>
+                    <h3 className="font-serif font-bold text-xl text-gray-900 mb-3">{session.location}</h3>
+                    <p className="text-gray-600 leading-relaxed">{session.desc}<sup className="text-xs text-gray-400 ml-1">[3]</sup></p>
+                  </div>
+                </div>
+
+                {/* Desktop Image */}
+                <div className={cn(
+                  "hidden md:block md:w-1/2",
+                  idx % 2 === 0 ? "md:pl-12" : "md:pr-12 md:order-1"
+                )}>
+                  <img 
+                    src={`/images/session${idx + 1}.jpg`}
+                    alt={`Session ${idx + 1}`}
+                    className="w-full aspect-video object-cover rounded-lg shadow-md grayscale hover:grayscale-0 transition-all duration-300"
+                  />
                 </div>
               </FadeIn>
             ))}
@@ -231,42 +253,52 @@ const PledgeSection = () => (
         </h2>
       </FadeIn>
       
-      <div className="space-y-16 max-w-4xl mx-auto">
-        <FadeIn delay={0.2} className="flex gap-6 md:gap-8">
-          <span className="font-serif text-[#C8102E] font-bold text-3xl md:text-5xl">1.</span>
-          <div>
-            <p className="font-serif text-2xl md:text-4xl leading-snug mb-3">
-              We the sons and daughters of Indonesia, acknowledge one motherland, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">Indonesia.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup>
-            </p>
-            <p className="text-lg md:text-xl text-gray-400 italic">
-              (Kami putra dan putri Indonesia, mengaku bertumpah darah yang satu, tanah Indonesia.)
-            </p>
-          </div>
+      <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16">
+        <FadeIn className="w-full lg:w-5/12 flex justify-center">
+          <img 
+            src="/images/original-manuscript.webp" 
+            alt="Original Youth Pledge Manuscript" 
+            className="w-full max-w-md rounded-md shadow-[0_10px_40px_rgba(255,255,255,0.1)] border border-white/10" 
+          />
         </FadeIn>
         
-        <FadeIn delay={0.4} className="flex gap-6 md:gap-8">
-          <span className="font-serif text-[#C8102E] font-bold text-3xl md:text-5xl">2.</span>
-          <div>
-            <p className="font-serif text-2xl md:text-4xl leading-snug mb-3">
-              We the sons and daughters of Indonesia, acknowledge one nation, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">the nation of Indonesia.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup>
-            </p>
-            <p className="text-lg md:text-xl text-gray-400 italic">
-              (Kami putra dan putri Indonesia, mengaku berbangsa yang satu, bangsa Indonesia.)
-            </p>
-          </div>
-        </FadeIn>
-        
-        <FadeIn delay={0.6} className="flex gap-6 md:gap-8">
-          <span className="font-serif text-[#C8102E] font-bold text-3xl md:text-5xl">3.</span>
-          <div>
-            <p className="font-serif text-2xl md:text-4xl leading-snug mb-3">
-              We the sons and daughters of Indonesia, respect the language of unity, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">Indonesian.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup>
-            </p>
-            <p className="text-lg md:text-xl text-gray-400 italic">
-              (Kami putra dan putri Indonesia, menjunjung bahasa persatuan, bahasa Indonesia.)
-            </p>
-          </div>
-        </FadeIn>
+        <div className="w-full lg:w-7/12 space-y-12 lg:space-y-16">
+          <FadeIn delay={0.2} className="flex gap-6 md:gap-8">
+            <span className="font-serif text-[#C8102E] font-bold text-3xl md:text-5xl">1.</span>
+            <div>
+              <p className="font-serif text-2xl md:text-4xl leading-snug mb-3">
+                We the sons and daughters of Indonesia, acknowledge one motherland, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">Indonesia.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup>
+              </p>
+              <p className="text-lg md:text-xl text-gray-400 italic">
+                (Kami putra dan putri Indonesia, mengaku bertumpah darah yang satu, tanah Indonesia.)
+              </p>
+            </div>
+          </FadeIn>
+          
+          <FadeIn delay={0.4} className="flex gap-6 md:gap-8">
+            <span className="font-serif text-[#C8102E] font-bold text-3xl md:text-5xl">2.</span>
+            <div>
+              <p className="font-serif text-2xl md:text-4xl leading-snug mb-3">
+                We the sons and daughters of Indonesia, acknowledge one nation, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">the nation of Indonesia.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup>
+              </p>
+              <p className="text-lg md:text-xl text-gray-400 italic">
+                (Kami putra dan putri Indonesia, mengaku berbangsa yang satu, bangsa Indonesia.)
+              </p>
+            </div>
+          </FadeIn>
+          
+          <FadeIn delay={0.6} className="flex gap-6 md:gap-8">
+            <span className="font-serif text-[#C8102E] font-bold text-3xl md:text-5xl">3.</span>
+            <div>
+              <p className="font-serif text-2xl md:text-4xl leading-snug mb-3">
+                We the sons and daughters of Indonesia, respect the language of unity, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">Indonesian.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup>
+              </p>
+              <p className="text-lg md:text-xl text-gray-400 italic">
+                (Kami putra dan putri Indonesia, menjunjung bahasa persatuan, bahasa Indonesia.)
+              </p>
+            </div>
+          </FadeIn>
+        </div>
       </div>
     </div>
   </section>
@@ -345,17 +377,24 @@ const AnthemSection = () => {
                 <span className="text-sm text-gray-500 block mt-2">4/4 Beat</span>
               </div>
             </div>
-            <p className="text-sm text-gray-400 text-right w-full block">[cite: 2, 3]</p>
+            <p className="text-sm text-gray-400 text-right w-full block mb-6">[cite: 2, 3]</p>
           </div>
 
-          {/* Working Audio Player Component */}
-          <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 mt-6 relative">
-            <audio 
-              ref={audioRef} 
-              src="/indonesia-raya.mp3" 
-              onTimeUpdate={handleTimeUpdate}
-              onEnded={() => setIsPlaying(false)}
+          <div className="flex flex-col gap-4 mt-auto">
+            <img 
+              src="/images/sinpo-score.jpg" 
+              alt="Sin Po Original Score" 
+              className="w-full h-32 md:h-48 object-cover object-top rounded-xl shadow-sm grayscale hover:grayscale-0 transition-all duration-300" 
             />
+
+            {/* Working Audio Player Component */}
+            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 relative">
+              <audio 
+                ref={audioRef} 
+                src="/indonesia-raya.mp3" 
+                onTimeUpdate={handleTimeUpdate}
+                onEnded={() => setIsPlaying(false)}
+              />
             <div className="flex items-center justify-between mb-4">
               <div>
                 <p className="font-bold text-gray-900">Indonesia Raya</p>
@@ -407,6 +446,7 @@ const AnthemSection = () => {
               </div>
             </div>
           </div>
+          </div>
         </FadeIn>
       </div>
     </section>
@@ -415,11 +455,11 @@ const AnthemSection = () => {
 
 const FiguresSection = () => {
   const figures = [
-    { name: "W.R. Supratman", role: "Composer of the national anthem & journalist." },
-    { name: "Mohammad Yamin", role: "Drafter of the Youth Pledge text." },
-    { name: "Sugondo Djoyopuspito", role: "Chairman of the Second Youth Congress." },
-    { name: "Amir Sjarifoeddin", role: "Treasurer of the Congress & anti-fascist figure who became Prime Minister." },
-    { name: "Johannes Leimena", role: "Jong Ambon figure advocating ethical politics." }
+    { name: "W.R. Supratman", role: "Composer of the national anthem & journalist.", image: "/images/supratman.jpg" },
+    { name: "Mohammad Yamin", role: "Drafter of the Youth Pledge text.", image: "/images/yamin.jpg" },
+    { name: "Sugondo Djoyopuspito", role: "Chairman of the Second Youth Congress.", image: "/images/sugondo.jpg" },
+    { name: "Amir Sjarifoeddin", role: "Treasurer of the Congress & anti-fascist figure who became Prime Minister.", image: "/images/amir.jpg" },
+    { name: "Johannes Leimena", role: "Jong Ambon figure advocating ethical politics.", image: "/images/johannes.jpg" }
   ];
 
   return (
@@ -445,6 +485,7 @@ const FiguresSection = () => {
                 <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
                   <Users size={64} />
                 </div>
+                <img src={fig.image} alt={fig.name} className="w-16 h-16 rounded-full object-cover mb-4 relative z-10 shadow-md border-2 border-white" />
                 <h3 className="font-serif font-bold text-xl text-gray-900 mb-2 relative z-10">{fig.name}</h3>
                 <p className="text-[#C8102E] font-medium text-sm relative z-10 leading-relaxed">{fig.role}</p>
               </div>
