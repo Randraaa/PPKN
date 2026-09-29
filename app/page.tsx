@@ -250,15 +250,7 @@ const PledgeSection = () => {
     <section id="pledge" className="relative py-32 bg-[#1A1A1A] text-white overflow-hidden">
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
       
-      {/* Dimmed Backdrop for Spotlight Effect */}
-      {isFocused && (
-        <div 
-          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm transition-opacity duration-500 cursor-zoom-out" 
-          onClick={() => setIsFocused(false)} 
-        />
-      )}
-
-      <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
+      <div className={cn("max-w-6xl mx-auto px-6 md:px-12 relative", isFocused ? "z-50" : "z-10")}>
         <FadeIn>
           <h2 className="font-serif text-5xl md:text-7xl text-center font-bold mb-20 tracking-tight">
             The Youth Pledge
@@ -266,16 +258,24 @@ const PledgeSection = () => {
         </FadeIn>
         
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16">
-          <FadeIn className="w-full lg:w-5/12 flex justify-center relative">
+          <FadeIn className={cn("w-full lg:w-5/12 flex justify-center relative", isFocused && "z-50")}>
+            {/* Dimmed Backdrop for Spotlight Effect */}
+            {isFocused && (
+              <div 
+                className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm transition-all duration-500 cursor-zoom-out" 
+                onClick={() => setIsFocused(false)} 
+              />
+            )}
+            
             <img 
               src="/images/original-manuscript.webp" 
               alt="Original Youth Pledge Manuscript" 
               onClick={() => setIsFocused(!isFocused)}
               className={cn(
-                "w-full max-w-md border border-white/10 cursor-pointer transition-all duration-500 ease-in-out",
+                "w-full max-w-md border border-white/10 rounded-md",
                 isFocused 
-                  ? "scale-125 md:scale-150 z-50 relative shadow-[0_0_50px_rgba(255,255,255,0.2)] rounded-lg" 
-                  : "rounded-md shadow-[0_10px_40px_rgba(255,255,255,0.1)]"
+                  ? "relative z-50 transform scale-[1.7] md:scale-150 shadow-2xl transition-transform duration-500 ease-out cursor-zoom-out" 
+                  : "relative z-10 transform scale-100 cursor-zoom-in transition-transform duration-500 shadow-[0_10px_40px_rgba(255,255,255,0.1)]"
               )}
             />
           </FadeIn>
