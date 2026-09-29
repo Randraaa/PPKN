@@ -243,66 +243,85 @@ const Timeline = () => {
   );
 };
 
-const PledgeSection = () => (
-  <section id="pledge" className="relative py-32 bg-[#1A1A1A] text-white overflow-hidden">
-    <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
-    <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
-      <FadeIn>
-        <h2 className="font-serif text-5xl md:text-7xl text-center font-bold mb-20 tracking-tight">
-          The Youth Pledge
-        </h2>
-      </FadeIn>
+const PledgeSection = () => {
+  const [isFocused, setIsFocused] = useState(false);
+
+  return (
+    <section id="pledge" className="relative py-32 bg-[#1A1A1A] text-white overflow-hidden">
+      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
       
-      <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16">
-        <FadeIn className="w-full lg:w-5/12 flex justify-center">
-          <img 
-            src="/images/original-manuscript.webp" 
-            alt="Original Youth Pledge Manuscript" 
-            className="w-full max-w-md rounded-md shadow-[0_10px_40px_rgba(255,255,255,0.1)] border border-white/10" 
-          />
+      {/* Dimmed Backdrop for Spotlight Effect */}
+      {isFocused && (
+        <div 
+          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm transition-opacity duration-500 cursor-zoom-out" 
+          onClick={() => setIsFocused(false)} 
+        />
+      )}
+
+      <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
+        <FadeIn>
+          <h2 className="font-serif text-5xl md:text-7xl text-center font-bold mb-20 tracking-tight">
+            The Youth Pledge
+          </h2>
         </FadeIn>
         
-        <div className="w-full lg:w-7/12 space-y-12 lg:space-y-16">
-          <FadeIn delay={0.2} className="flex gap-6 md:gap-8">
-            <span className="font-serif text-[#C8102E] font-bold text-3xl md:text-5xl">1.</span>
-            <div>
-              <p className="font-serif text-2xl md:text-4xl leading-snug mb-3">
-                We the sons and daughters of Indonesia, acknowledge one motherland, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">Indonesia.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup>
-              </p>
-              <p className="text-lg md:text-xl text-gray-400 italic">
-                (Kami putra dan putri Indonesia, mengaku bertumpah darah yang satu, tanah Indonesia.)
-              </p>
-            </div>
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16">
+          <FadeIn className="w-full lg:w-5/12 flex justify-center relative">
+            <img 
+              src="/images/original-manuscript.webp" 
+              alt="Original Youth Pledge Manuscript" 
+              onClick={() => setIsFocused(!isFocused)}
+              className={cn(
+                "w-full max-w-md border border-white/10 cursor-pointer transition-all duration-500 ease-in-out",
+                isFocused 
+                  ? "scale-125 md:scale-150 z-50 relative shadow-[0_0_50px_rgba(255,255,255,0.2)] rounded-lg" 
+                  : "rounded-md shadow-[0_10px_40px_rgba(255,255,255,0.1)]"
+              )}
+            />
           </FadeIn>
           
-          <FadeIn delay={0.4} className="flex gap-6 md:gap-8">
-            <span className="font-serif text-[#C8102E] font-bold text-3xl md:text-5xl">2.</span>
-            <div>
-              <p className="font-serif text-2xl md:text-4xl leading-snug mb-3">
-                We the sons and daughters of Indonesia, acknowledge one nation, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">the nation of Indonesia.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup>
-              </p>
-              <p className="text-lg md:text-xl text-gray-400 italic">
-                (Kami putra dan putri Indonesia, mengaku berbangsa yang satu, bangsa Indonesia.)
-              </p>
-            </div>
-          </FadeIn>
-          
-          <FadeIn delay={0.6} className="flex gap-6 md:gap-8">
-            <span className="font-serif text-[#C8102E] font-bold text-3xl md:text-5xl">3.</span>
-            <div>
-              <p className="font-serif text-2xl md:text-4xl leading-snug mb-3">
-                We the sons and daughters of Indonesia, respect the language of unity, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">Indonesian.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup>
-              </p>
-              <p className="text-lg md:text-xl text-gray-400 italic">
-                (Kami putra dan putri Indonesia, menjunjung bahasa persatuan, bahasa Indonesia.)
-              </p>
-            </div>
-          </FadeIn>
+          <div className="w-full lg:w-7/12 space-y-12 lg:space-y-16">
+            <FadeIn delay={0.2} className="flex gap-6 md:gap-8">
+              <span className="font-serif text-[#C8102E] font-bold text-3xl md:text-5xl">1.</span>
+              <div>
+                <p className="font-serif text-2xl md:text-4xl leading-snug mb-3">
+                  We the sons and daughters of Indonesia, acknowledge one motherland, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">Indonesia.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup>
+                </p>
+                <p className="text-lg md:text-xl text-gray-400 italic">
+                  (Kami putra dan putri Indonesia, mengaku bertumpah darah yang satu, tanah Indonesia.)
+                </p>
+              </div>
+            </FadeIn>
+            
+            <FadeIn delay={0.4} className="flex gap-6 md:gap-8">
+              <span className="font-serif text-[#C8102E] font-bold text-3xl md:text-5xl">2.</span>
+              <div>
+                <p className="font-serif text-2xl md:text-4xl leading-snug mb-3">
+                  We the sons and daughters of Indonesia, acknowledge one nation, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">the nation of Indonesia.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup>
+                </p>
+                <p className="text-lg md:text-xl text-gray-400 italic">
+                  (Kami putra dan putri Indonesia, mengaku berbangsa yang satu, bangsa Indonesia.)
+                </p>
+              </div>
+            </FadeIn>
+            
+            <FadeIn delay={0.6} className="flex gap-6 md:gap-8">
+              <span className="font-serif text-[#C8102E] font-bold text-3xl md:text-5xl">3.</span>
+              <div>
+                <p className="font-serif text-2xl md:text-4xl leading-snug mb-3">
+                  We the sons and daughters of Indonesia, respect the language of unity, <span className="font-bold underline decoration-[#C8102E] decoration-4 underline-offset-8">Indonesian.</span><sup className="text-sm text-gray-500 ml-1">[3]</sup>
+                </p>
+                <p className="text-lg md:text-xl text-gray-400 italic">
+                  (Kami putra dan putri Indonesia, menjunjung bahasa persatuan, bahasa Indonesia.)
+                </p>
+              </div>
+            </FadeIn>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const AnthemSection = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
