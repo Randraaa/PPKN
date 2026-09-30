@@ -54,35 +54,41 @@ const Navbar = () => {
 };
 
 const Hero = () => (
-  <section className="relative min-h-screen flex flex-col items-center justify-center pt-24 px-6 text-center overflow-hidden">
+  <section className="relative flex flex-col items-center justify-center pt-32 pb-24 md:py-32 px-6 text-center overflow-hidden">
     <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-stone-200/60 via-[#fcfbf9] to-[#fcfbf9]"></div>
-    <div className="absolute inset-0 -z-10 opacity-5 pointer-events-none" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23292524%22 fill-opacity=%221%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')" }}></div>
+    <div className="absolute inset-0 z-0 bg-[url('/images/batik.png')] bg-repeat bg-[length:400px_400px] opacity-10 pointer-events-none"></div>
     
-    <FadeIn delay={0.1}>
-      <span className="table mx-auto py-1 px-3 rounded-full bg-red-100 text-[#C8102E] text-xs font-semibold tracking-widest uppercase mb-6">
-        History of the National Movement
-      </span>
-    </FadeIn>
-    
-    <FadeIn delay={0.2} className="max-w-5xl">
-      <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 leading-[1.1] mb-6">
-        Youth Pledge 1928 &<br/>
-        <span className="text-[#C8102E]">Indonesia Raya:</span><br/>
-        A Milestone of National Unity<sup className="text-2xl text-gray-400 ml-2">[2, 3]</sup>
-      </h1>
-    </FadeIn>
-    
-    <FadeIn delay={0.3} className="max-w-2xl mx-auto">
-      <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-12">
-        The Role of Youth, the Meaning of the 1928 Youth Pledge, and the History of the Indonesian National Anthem<sup className="text-sm text-gray-400 ml-1">[2, 3]</sup>
-      </p>
-    </FadeIn>
+    <div className="relative z-10 w-full flex flex-col items-center">
+      <FadeIn delay={0.1}>
+        <span className="table mx-auto py-1 px-3 rounded-full bg-red-100 text-[#C8102E] text-xs font-semibold tracking-widest uppercase mb-6">
+          History of the National Movement
+        </span>
+      </FadeIn>
+      
+      <FadeIn delay={0.2} className="max-w-5xl">
+        <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 leading-[1.1] mb-6">
+          Youth Pledge 1928 &<br/>
+          <span className="text-[#C8102E]">Indonesia Raya:</span><br/>
+          A Milestone of National Unity<sup className="text-2xl text-gray-400 ml-2">[2, 3]</sup>
+        </h1>
+      </FadeIn>
+      
+      <FadeIn delay={0.3} className="max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+          The Role of Youth, the Meaning of the 1928 Youth Pledge, and the History of the Indonesian National Anthem<sup className="text-sm text-gray-400 ml-1">[2, 3]</sup>
+        </p>
+      </FadeIn>
+    </div>
+  </section>
+);
 
-    <FadeIn delay={0.5} className="mt-8 max-w-3xl mx-auto relative">
+const QuoteSection = () => (
+  <section className="py-16 md:py-20 px-6 relative z-10">
+    <FadeIn delay={0.1} className="max-w-3xl mx-auto relative">
       <div className="absolute -top-6 -left-6 text-gray-200">
         <Quote size={64} className="opacity-50" />
       </div>
-      <blockquote className="relative z-10 p-8 rounded-2xl bg-white/60 backdrop-blur-sm border border-gray-100 shadow-xl shadow-gray-200/20">
+      <blockquote className="relative z-10 p-8 rounded-2xl bg-white shadow-xl border border-gray-100 shadow-gray-200/20 text-center">
         <p className="font-serif text-2xl md:text-3xl font-medium text-gray-800 leading-snug mb-2">
           "Politics is not an instrument of power, but an ethic to serve."
         </p>
@@ -552,9 +558,10 @@ const Footer = () => (
 
 export default function Page() {
   return (
-    <main className="relative min-h-screen bg-[#F9F6F0] font-sans selection:bg-[#C8102E] selection:text-white">
+    <main className="relative min-h-screen bg-transparent font-sans selection:bg-[#C8102E] selection:text-white">
       <Navbar />
       <Hero />
+      <QuoteSection />
       <BackgroundSection />
       <Timeline />
       <PledgeSection />
