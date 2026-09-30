@@ -30,8 +30,9 @@ const Navbar = () => {
 
   return (
     <>
+      <div className="fixed top-0 w-full h-1.5 bg-gradient-to-r from-red-600 to-white z-[60]" />
       <nav className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300",
+        "fixed top-1.5 w-full z-50 transition-all duration-300",
         scrolled ? "bg-white/80 backdrop-blur-md border-b border-gray-200/50 py-4 shadow-sm" : "bg-transparent py-6"
       )}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
@@ -54,10 +55,11 @@ const Navbar = () => {
 
 const Hero = () => (
   <section className="relative min-h-screen flex flex-col items-center justify-center pt-24 px-6 text-center overflow-hidden">
-    <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-100 via-[#F9F6F0] to-[#F9F6F0]"></div>
+    <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-stone-200/60 via-[#fcfbf9] to-[#fcfbf9]"></div>
+    <div className="absolute inset-0 -z-10 opacity-5 pointer-events-none" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23292524%22 fill-opacity=%221%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')" }}></div>
     
     <FadeIn delay={0.1}>
-      <span className="inline-block py-1 px-3 rounded-full bg-red-100 text-[#C8102E] text-xs font-semibold tracking-widest uppercase mb-6">
+      <span className="table mx-auto py-1 px-3 rounded-full bg-red-100 text-[#C8102E] text-xs font-semibold tracking-widest uppercase mb-6">
         History of the National Movement
       </span>
     </FadeIn>
@@ -103,7 +105,7 @@ const BackgroundSection = () => (
         <FadeIn>
           <div className="flex items-center gap-3 mb-6">
             <BookOpen className="text-[#C8102E]" size={24} />
-            <h2 className="font-serif text-4xl font-bold text-gray-900">Historical Background</h2>
+            <h2 className="font-serif text-4xl font-bold text-gray-900 border-b-2 border-[#d4af37] pb-2 inline-block">Historical Background</h2>
           </div>
         </FadeIn>
         
@@ -177,7 +179,7 @@ const Timeline = () => {
     <section id="congress" className="py-24 bg-white">
       <div className="max-w-4xl mx-auto px-6 md:px-12">
         <FadeIn className="text-center mb-16">
-          <h2 className="font-serif text-4xl font-bold text-gray-900 mb-6">The Second Youth Congress</h2>
+          <h2 className="font-serif text-4xl font-bold text-gray-900 mb-6 border-b-2 border-[#d4af37] pb-2 table mx-auto">The Second Youth Congress</h2>
           <div className="flex flex-wrap justify-center gap-4 text-sm font-medium text-gray-700 bg-gray-50 p-4 rounded-xl inline-flex border border-gray-100 leading-relaxed">
             <span><strong className="text-gray-900">Chairman:</strong> Sugondo Djoyopuspito</span>
             <span className="text-gray-300 hidden md:inline">|</span>
@@ -252,7 +254,7 @@ const PledgeSection = () => {
       
       <div className={cn("max-w-6xl mx-auto px-6 md:px-12 relative", isFocused ? "z-50" : "z-10")}>
         <FadeIn>
-          <h2 className="font-serif text-5xl md:text-7xl text-center font-bold mb-20 tracking-tight">
+          <h2 className="font-serif text-5xl md:text-7xl text-center font-bold mb-20 tracking-tight border-b-2 border-[#d4af37] pb-2 table mx-auto">
             The Youth Pledge
           </h2>
         </FadeIn>
@@ -359,7 +361,7 @@ const AnthemSection = () => {
     <section id="anthem" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
       <FadeIn className="text-center mb-16">
         <Music className="text-[#C8102E] mx-auto mb-6" size={40} />
-        <h2 className="font-serif text-4xl font-bold text-gray-900 mb-6">History of "Indonesia Raya"</h2>
+        <h2 className="font-serif text-4xl font-bold text-gray-900 mb-6 border-b-2 border-[#d4af37] pb-2 table mx-auto">History of "Indonesia Raya"</h2>
       </FadeIn>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-16">
@@ -429,7 +431,7 @@ const AnthemSection = () => {
             <div className="flex items-center gap-4 text-gray-700">
               <button 
                 onClick={() => { if(audioRef.current && isFinite(audioRef.current.duration)) audioRef.current.currentTime = 0; }} 
-                className="hover:text-[#C8102E] transition-colors"
+                className="hover:text-[#d4af37] transition-colors"
                 aria-label="Restart"
               >
                 <SkipBack size={20} />
@@ -445,7 +447,7 @@ const AnthemSection = () => {
               
               <button 
                 onClick={() => { if(audioRef.current && isFinite(audioRef.current.duration)) audioRef.current.currentTime = Math.min(audioRef.current.currentTime + 10, audioRef.current.duration); }} 
-                className="hover:text-[#C8102E] transition-colors"
+                className="hover:text-[#d4af37] transition-colors"
                 aria-label="Skip Forward 10s"
               >
                 <SkipForward size={20} />
@@ -487,7 +489,7 @@ const FiguresSection = () => {
     <section id="figures" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <FadeIn className="text-center mb-16">
-          <h2 className="font-serif text-4xl font-bold text-gray-900 mb-4">Key Figures<sup className="text-xl text-gray-400 ml-1">[1, 2, 3]</sup></h2>
+          <h2 className="font-serif text-4xl font-bold text-gray-900 mb-4 border-b-2 border-[#d4af37] pb-2 table mx-auto">Key Figures<sup className="text-xl text-gray-400 ml-1">[1, 2, 3]</sup></h2>
           <p className="text-gray-600 max-w-2xl mx-auto">The youths and prominent figures who became the driving force behind the birth of the Youth Pledge and the national anthem.</p>
         </FadeIn>
 
@@ -523,7 +525,7 @@ const Footer = () => (
     <div className="max-w-5xl mx-auto px-6 md:px-12 text-center">
       <FadeIn>
         <MessageCircle size={48} className="mx-auto text-gray-700 mb-8" />
-        <h2 className="font-serif text-3xl font-bold mb-12">Discussion & Reflection</h2>
+        <h2 className="font-serif text-3xl font-bold mb-12 border-b-2 border-[#d4af37] pb-2 table mx-auto">Discussion & Reflection</h2>
         
         <div className="space-y-6 text-left max-w-3xl mx-auto">
           <div className="p-6 rounded-2xl bg-gray-800 border border-gray-700 flex gap-4 items-start">
